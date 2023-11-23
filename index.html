@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #out{
+            width: 500px;height: 500px;
+            border: 2px solid black;
+            border-radius: 45px ;
+            display: flex;
+             align-items: center;
+             justify-content: space-evenly;
+             flex-direction: column;
+         }
+        #display{
+    
+             width: 250px;
+             height: 250px;
+             border: 2px solid black;
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             position: relative;
+        }
+        #digital{
+            width: 350px;
+            height: 100px;
+            border: 2px solid black;
+            border-radius: 15px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+        #center{
+            width: 2%;
+            background: black;
+            height: 2%;
+            border: 2px solid black;
+            border-radius: 50%;
+        }
+        #hour{
+           position: absolute;
+           top: 50px;
+           width: 8px;
+           height: 75px;
+           background: black;
+           border: 1px solid black;
+           border-radius: 60% 60% 0% 0px;
+           transform: rotate(0deg);
+           transform-origin: bottom;
+           
+        }
+        #min{
+           position: absolute;
+           top: 33px;
+           width: 6px;
+           height: 91px;
+           border: 1px solid black;
+           background: yellow;
+           border-radius: 150% 150% 0% 0px;
+           transform: rotate(0deg);
+           transform-origin: bottom;
+           
+        }
+        #sec{
+           position: absolute;
+           top: 14px;
+           width: 3px;
+           height: 111px;
+           border: 1px solid black;
+           background: red;
+           border-radius: 150% 150% 0% 0px;
+           transform: rotate(0deg);
+           transform-origin: bottom;
+        }
+        span{
+            position: absolute;
+            font-weight: bold;
+            font-size: 23px;
+        }
+        #twelve{
+            top:2px;
+        }
+        #eleven{
+            top: 19px;
+            left: 56px;
+        }
+        #ten{
+            top:63px;
+            left: 15px;
+        }
+        #nine{
+            top: 113px;
+            left: 2px;
+         }
+         #eight{
+            top: 175px;
+            left:19px;
+         }
+         #seven{
+            top:214px;
+            left:62px;
+         }
+         #six{
+            top:230px;
+         }
+         #five{
+            top:214px;
+            left:177px;
+         }
+         #four{
+            top:172px;
+            left:215px;
+         }
+         #three{
+            top: 116px;
+            left: 236px;
+         }
+         #two{
+            top:57px;
+            left:220px;
+         }
+         #one{
+            top:14px;
+            left:182px;
+         }
+         button{
+            background-color: transparent;
+            border: none;
+            color:black;
+            font-weight: bold;
+            font-size:27px;
+         }
+         #bright{
+            position: absolute;
+            top: 86px;
+            left:8px;
+         }
+         #dark{
+            position: absolute;
+            top: 48px;
+            left:8px;
+            color: black;
+         }
+         #light{
+            color: black;
+         }
+         ion-icon {
+           color: black;
+        }
+
+    
+    </style>
+
+</head>
+<body onload="test()">
+    <div id="out">
+        <div id="light">
+            <div id="bright"><button onclick="bright()"><ion-icon name="sunny-outline"></ion-icon></button></div>
+            <div id="dark"><button onclick="dark()"><ion-icon name="moon-outline"></ion-icon></button></div>
+        </div>
+      <div id="display">
+        <span id="one">1</span>
+        <span id="two">2</span>
+        <span id="three">3</span>
+        <span id="four">4</span>
+        <span id="five">5</span>
+        <span id="six">6</span>
+        <span id="seven">7</span>
+        <span id="eight">8</span>
+        <span id="nine">9</span>
+        <span id="ten">10</span>
+        <span id="eleven">11</span>
+        <span id="twelve">12</span>
+        <div id="center"></div>
+        <div id ="hour"></div>
+        <div id="min"></div>
+        <div id="sec"></div>
+      </div>
+      <div id="digital"> <h1></h1></div> 
+
+    </div>
+</body>
+<script>
+    function test(){
+        setInterval(
+            function showtime(){
+                var d= new Date;
+        var H =d.getHours();
+        var m=d.getMinutes();
+        var s= d.getSeconds();
+        var session ="AM";
+
+         if(H>=12){
+            session="PM";
+        }
+        if(H>=12){
+            h = H-12;
+        }else{
+            h=H;
+        }
+        
+        var cs =s*6;
+        var bm =m*6;
+        var ah = 30*h+m/2;
+
+        h=h<10?"0"+h:h;
+        m=m<10?"0"+m:m;
+        s=s<10?"0"+s:s;
+        var time = h + " : " + m + " : " + s + "  "+session ;
+        
+        document.getElementsByTagName("h1")[0].innerText=time;
+        document.getElementById("sec").style.rotate=cs+"deg";
+        document.getElementById('min').style.rotate=bm+"deg";
+        document.getElementById('hour').style.rotate=ah+"deg";
+    },1000 
+        )
+    }
+    function bright(){
+        // location.reload();
+        document.getElementById("sec").style.backgroundColor="red";
+        document.getElementById('min').style.backgroundColor="yellow";
+        document.getElementById('hour').style.backgroundColor="black";
+        document.getElementById("out").style.backgroundColor="white";
+        document.getElementById("display").style.color="black";
+        document.getElementById("display").style.border="2px solid black";
+        document.getElementById("digital").style.border="2px solid black";
+        document.getElementsByTagName("h1")[0].style.color="black";
+        document.getElementsByTagName("ion-icon")[0].style.color="black";
+        document.getElementsByTagName("ion-icon")[1].style.color="black";
+
+    }
+    function dark(){
+        document.getElementById("sec").style.backgroundColor="pink";
+        document.getElementById('min').style.backgroundColor="pink";
+        document.getElementById('hour').style.backgroundColor="pink";
+        document.getElementById("out").style.backgroundColor="black";
+        document.getElementById("display").style.color="white";
+        document.getElementById("display").style.border="2px dotted white";
+        document.getElementById("digital").style.border="2px solid white";
+        document.getElementsByTagName("h1")[0].style.color="white";
+        document.getElementsByTagName("ion-icon")[0].style.color="white";
+        document.getElementsByTagName("ion-icon")[1].style.color="white";
+
+    }
+
+</script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</html>
